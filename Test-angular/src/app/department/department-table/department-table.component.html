@@ -1,0 +1,95 @@
+<p>
+  <p-table
+    [value]="departmentList"
+    selectionMode="single"
+    [paginator]="true"
+    (onRowSelect)="onRowSelect($event)"
+    [rows]="15"
+  >
+    <ng-template pTemplate="caption">
+      List of department
+      <div style="text-align:right">
+      <button 
+        (click)="addITem()"
+        type="button"
+        pButton
+        icon="pi pi-plus"
+        label="Add"
+        class="ui-button-raised ui-button-success"
+      ></button>
+      </div>  
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>
+          Code
+        </th>
+        <th>
+          Department
+        </th>
+        <th>
+          Province
+        </th>
+        <th>
+          Bugget
+        </th>
+        <th>
+          Status
+        </th>
+        <th>
+          telephone
+        </th>
+        <th>
+          Remove
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td style="text-align:center">
+          {{ rowData.departmentCode }}
+        </td>
+        <td>
+          {{ rowData.departmentName }}
+        </td>
+        <td>
+          {{ rowData.province }}
+        </td>
+        <td style="text-align:right">
+          {{ rowData.budget }}
+        </td>
+        <td style="text-align:center">
+          {{ rowData.status | status }}
+        </td>
+        <td>
+          {{ rowData.telephone }}
+        </td>
+        <td style="text-align:center">
+          <button
+            pButton
+            type="button"
+            label="Remove"
+            (click)="deleteDepartment(rowData.departmentCode)"
+            class="ui-button-danger"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary" let-rowData>
+      <div style="text-align:left"></div>
+    </ng-template>
+  </p-table>
+</p>
+<p-dialog
+  header="Car Details"
+  [(visible)]="displayDialog"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [style]="{ width: '900px', height: '300px' }"
+>
+  <app-department-form
+    (save)="updataSelectedRow($event)"
+    #departmentform
+  ></app-department-form>
+</p-dialog>

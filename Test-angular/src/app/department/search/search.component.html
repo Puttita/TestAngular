@@ -1,0 +1,136 @@
+{{ departmentForm.getRawValue() | json }}
+<div>
+  <div class="ui-g">
+    <div class="ui-g-4"></div>
+    <div class="ui-g-4" style="text-align: center">
+      <b>
+        <h2>Search Topic : {{ topic }}</h2>
+      </b>
+    </div>
+  </div>
+
+  <div [formGroup]="departmentForm"> 
+    <div class="ui-g">
+      <div class="ui-g-4" style="text-align: right;">Deparment:</div>
+      <div class="ui-g-4">
+        <input formControlName="departmentName" type="text" pInputText />
+        <span
+          *ngIf="
+            departmentForm.get('departmentName').hasError('required') && departmentForm.get('departmentName').touched" >
+          <p-message severity="error" text="ห้ามพิมพ์คำหยาบนะจ้ะ">
+          </p-message>
+        </span>
+        <span *ngIf="departmentForm.get('departmentName').hasError('pattern')">
+          <p-message severity="error" text="ผิดนะจ๊ะ"> </p-message>
+        </span>
+      <span *ngIf="departmentForm.get('departmentName').hasError('Fuck')">
+        <p-message severity="error" text="ห้ามพิมพ์คำหยาบนะจ้ะ"> </p-message>
+      </span>
+      </div>
+      <div class="ui-g-4"></div>
+    </div>
+    
+
+
+
+
+    
+
+    <div class="ui-g">
+      <div class="ui-g-4" style="text-align: right;">Provine:</div>
+      <div class="ui-g-4">
+        <p-dropdown formControlName="province" [options]="cities1"></p-dropdown>
+
+      </div>
+      <div class="ui-g-4"></div>
+    </div>
+
+    <div class="ui-g">
+      <div class="ui-g-4" style="text-align: right;">Budget:</div>
+      <div class="ui-g-2">
+        <input formControlName="budgetFrom" type="text" pInputText />
+        <span *ngIf="departmentForm.get('budgetFrom').hasError('pattern')">
+          <p-message severity="error" text="ผิดแล้วจ้า"> </p-message>
+        </span>
+      </div>
+      <div class="ui-g-4">
+        To:<input formControlName="budgetTo" type="text" pInputText />
+        <span *ngIf="departmentForm.get('budgetTo').hasError('pattern')">
+          <p-message severity="error" text="ผิดนะจ๊ะ"> </p-message>
+        </span>
+      </div>
+    </div>
+
+    <div class="ui-g">
+      <div class="ui-g-4" style="text-align: right;">Status:</div>
+      <div class="ui-g-3">
+        <p-radioButton
+          formControlName="status"
+          #R1
+          name="groupname"
+          value="y"
+          label="Active"
+          (click)="Active(R1.value, R3)"
+        >
+        </p-radioButton>
+        <p-radioButton
+          formControlName="status"
+          #R2
+          name="groupname"
+          value="n"
+          label="Deactive"
+          (click)="Active(R2.value, R3)"
+        ></p-radioButton>
+      </div>
+    </div>
+
+    <div class="ui-g">
+      <div class="ui-g-4" style="text-align: right;">Remark:</div>
+      <div class="ui-g-4">
+        <input
+          formControlName="remark"
+          type="text"
+          pInputText
+          #R3
+          [attr.disabled]="You"
+        />
+        <span *ngIf="departmentForm.get('remark').hasError('maxlength')">
+                <p-message severity="error" text="ผิดนะจ๊ะ"> </p-message>
+              </span>
+      </div>
+    </div>
+
+    <div class="ui-g">
+      <div class="ui-g-4" style="text-align: right;">Telephone:</div>
+      <div class="ui-g-4">
+        <input formControlName="telephone" type="text" pInputText />
+        <span *ngIf="departmentForm.get('telephone').hasError('pattern')">
+          <p-message severity="error" text="ผิดนะจ๊ะ"> </p-message>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-4" style="text-align: right;"></div>
+    <div class="ui-g-1">
+      <button
+        pButton
+        type="button"
+        label="Search"
+        (click)="search()"
+        class="ui-button-success"
+        style="background-color:rgb(240, 12, 99)"
+      ></button>
+    </div>
+    <div class="ui-g-4">
+      <button
+        pButton
+        type="button"
+        label="Cancel"
+        (click)="Cancel()"
+        class="ui-button-warning"
+      ></button>
+    </div>
+  </div>
+</div>
